@@ -15,8 +15,10 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }  // Add this line
     }
 }
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir
