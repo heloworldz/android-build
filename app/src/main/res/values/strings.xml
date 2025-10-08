@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="Theme.LostAndFound" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <string name="app_name">LostAndFound</string>
         <!-- Primary branding color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -20,3 +20,4 @@
     </style>
 
 </resources>
+
