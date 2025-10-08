@@ -17,10 +17,11 @@
             android:layout_height="wrap_content" />
 
         <Spinner
-            android:id="@+id/spinnerType"
-            android:entries="@array/post_types"
+            android:id="@+id/spinner_post_type"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:entries="@array/post_types" />
+
 
         <EditText
             android:id="@+id/editTextDescription"
@@ -52,5 +53,6 @@
             android:visibility="gone"
             android:background="@android:color/darker_gray"/>
     </LinearLayout>
+
 
 </ScrollView>
