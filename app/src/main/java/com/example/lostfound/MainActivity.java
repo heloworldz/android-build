@@ -1,4 +1,4 @@
-package com.example.lostfoundnetwork;
+package com.example.lostfound;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,18 +19,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -192,3 +195,4 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Image selected", Toast.LENGTH_SHORT).show();
     }
 }
+
