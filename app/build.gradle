@@ -1,8 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android' // remove if not using Kotlin
-    id 'com.google.gms.google-services' // Firebase plugin
+    id 'com.google.gms.google-services' // Google services plugin
 }
+
 
 android {
     namespace 'com.example.lostandfound'
@@ -60,3 +61,4 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.6'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
+
