@@ -1,4 +1,7 @@
-<string-array name="post_types">
-    <item>Lost</item>
-    <item>Found</item>
-</string-array>
+<resources>
+    <string name="app_name">LostAndFound</string>
+    <string-array name="post_types">
+        <item>Lost</item>
+        <item>Found</item>
+    </string-array>
+</resources>
