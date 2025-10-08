@@ -1,20 +1,15 @@
 <resources>
-
-    <!-- Base application theme -->
     <style name="Theme.LostAndFound" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary color of the app -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
 
-        <!-- Secondary color -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
 
-        <!-- Status bar and navigation bar styling -->
         <item name="android:statusBarColor">@color/purple_700</item>
         <item name="android:navigationBarColor">@color/purple_700</item>
+        <item name="android:windowBackground">@color/white</item> <!-- merged from old strings.xml -->
     </style>
-
 </resources>
