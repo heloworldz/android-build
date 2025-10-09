@@ -1,7 +1,4 @@
 package com.lostandfound;
-import com.lostandfound.R;
-import com.lostandfound.Post;
-import com.lostandfound.PostsAdapter;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -24,11 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -55,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize Firebase
         firestore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference("post_images");
 
@@ -103,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
         Button buttonSelectImage = viewInflated.findViewById(R.id.buttonSelectImage);
         imageViewPreviewDialog = viewInflated.findViewById(R.id.imageViewPreview);
 
-        // Select image
         buttonSelectImage.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE);
@@ -113,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
 
         AlertDialog dialog = builder.create();
-
         dialog.setOnShowListener(dialogInterface -> {
             Button button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
             button.setOnClickListener(view -> {
@@ -179,7 +170,3 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-
-
-
-
