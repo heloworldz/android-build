@@ -1,5 +1,6 @@
 package com.example.lostfoundnetwork;
 
+import com.example.lostfoundnetwork.R;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,4 +62,5 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
             textViewLocation = itemView.findViewById(R.id.textViewLocation);
         }
     }
+
 }
