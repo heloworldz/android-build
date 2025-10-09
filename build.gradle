@@ -6,8 +6,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.0'
-        classpath 'com.google.gms:google-services:4.4.3' // update version if needed
+        // Android Gradle Plugin
+        classpath 'com.android.tools.build:gradle:8.6.1'
+
+        // Google Services Plugin (for Firebase)
+        classpath 'com.google.gms:google-services:4.4.2'
     }
 }
 
@@ -15,11 +18,9 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-
     }
 }
 
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
+tasks.register("clean", Delete) {
+    delete(rootProject.buildDir)
 }
