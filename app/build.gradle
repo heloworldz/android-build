@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.lostandfound'
+    namespace 'com.example.lostfound'
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.example.lostandfound" // ✅ must match namespace
+        applicationId "com.example.lostandfound"
         minSdk 24
         targetSdk 35
         versionCode 1
@@ -56,3 +56,4 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 }
+
