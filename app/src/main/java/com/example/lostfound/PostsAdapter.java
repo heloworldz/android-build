@@ -1,6 +1,6 @@
 package com.lostandfound;
 
-import com.example.lostfoundnetwork.R;
+import com.lostandfound.R;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,5 +64,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
     }
 
 }
+
 
 
