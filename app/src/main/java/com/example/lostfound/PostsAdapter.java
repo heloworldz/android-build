@@ -1,6 +1,5 @@
 package com.lostandfound;
 
-import com.lostandfound.R;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +26,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_post, parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false);
         return new PostViewHolder(view);
     }
 
@@ -62,8 +61,4 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
             textViewLocation = itemView.findViewById(R.id.textViewLocation);
         }
     }
-
 }
-
-
-
