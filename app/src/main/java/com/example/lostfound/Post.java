@@ -1,4 +1,4 @@
-package com.example.lostfoundnetwork;
+package com.lostandfound;
 
 public class Post {
     private String id;
@@ -32,4 +32,5 @@ public class Post {
 
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
 }
