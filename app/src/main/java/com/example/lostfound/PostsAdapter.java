@@ -1,4 +1,4 @@
-package com.example.lostfoundnetwork;
+package com.lostandfound;;
 
 import com.example.lostfoundnetwork.R;
 import android.content.Context;
@@ -64,3 +64,4 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
     }
 
 }
+
