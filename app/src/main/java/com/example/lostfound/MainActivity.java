@@ -1,4 +1,4 @@
-package com.lostandfound;
+package com.example.lostfound;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -170,3 +170,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
