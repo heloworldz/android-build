@@ -1,7 +1,10 @@
-package com.example.lostfound;
+package com.example.lostandfound;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,28 +15,23 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,15 +44,15 @@ public class MainActivity extends AppCompatActivity {
     private StorageReference storageReference;
     private FirebaseFirestore firestore;
 
-    // Reference to ImageView inside dialog
     private ImageView imageViewPreviewDialog;
+    private static final int REQUEST_CODE_PICK_IMAGE = 1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize Firestore & Storage
+        // Initialize Firebase
         firestore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference("post_images");
 
@@ -63,35 +61,28 @@ public class MainActivity extends AppCompatActivity {
 
         postList = new ArrayList<>();
         adapter = new PostsAdapter(this, postList);
-
         recyclerViewPosts.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewPosts.setAdapter(adapter);
 
         fabAddPost.setOnClickListener(v -> showAddPostDialog());
-
         loadPosts();
     }
 
     private void loadPosts() {
         CollectionReference postsRef = firestore.collection("posts");
-
-        postsRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value,
-                                @Nullable FirebaseFirestoreException error) {
-                if (error != null) {
-                    Toast.makeText(MainActivity.this, "Error loading posts", Toast.LENGTH_SHORT).show();
-                    return;
+        postsRef.addSnapshotListener((value, error) -> {
+            if (error != null) {
+                Toast.makeText(MainActivity.this, "Error loading posts", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            postList.clear();
+            if (value != null) {
+                for (QueryDocumentSnapshot doc : value) {
+                    Post post = doc.toObject(Post.class);
+                    post.setId(doc.getId());
+                    postList.add(post);
                 }
-                postList.clear();
-                if (value != null) {
-                    for (QueryDocumentSnapshot doc : value) {
-                        Post post = doc.toObject(Post.class);
-                        post.setId(doc.getId());
-                        postList.add(post);
-                    }
-                    adapter.notifyDataSetChanged();
-                }
+                adapter.notifyDataSetChanged();
             }
         });
     }
@@ -100,30 +91,22 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Add Lost/Found Item");
 
-        // Inflate layout
         View viewInflated = LayoutInflater.from(this).inflate(R.layout.dialog_add_post, null, false);
         builder.setView(viewInflated);
 
-        // Get references
         Spinner spinnerType = viewInflated.findViewById(R.id.spinner_post_type);
         EditText editTextDescription = viewInflated.findViewById(R.id.editTextDescription);
         EditText editTextLocation = viewInflated.findViewById(R.id.editTextLocation);
         Button buttonSelectImage = viewInflated.findViewById(R.id.buttonSelectImage);
         imageViewPreviewDialog = viewInflated.findViewById(R.id.imageViewPreview);
 
-        selectedImageUri = null;
-        imageViewPreviewDialog.setVisibility(View.GONE);
-
-        // Select image using ImagePicker
+        // Select image
         buttonSelectImage.setOnClickListener(v -> {
-            ImagePicker.with(MainActivity.this)
-                    .crop()
-                    .compress(1024)
-                    .maxResultSize(1080, 1080)
-                    .start();
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE);
         });
 
-        builder.setPositiveButton("Post", null); // override later
+        builder.setPositiveButton("Post", null);
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
 
         AlertDialog dialog = builder.create();
@@ -179,20 +162,17 @@ public class MainActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> Toast.makeText(MainActivity.this, "Failed to add post", Toast.LENGTH_SHORT).show());
     }
 
-    // Handle ImagePicker result
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable android.content.Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (data == null || data.getData() == null) return;
-
-        selectedImageUri = data.getData();
-        if (imageViewPreviewDialog != null) {
-            imageViewPreviewDialog.setVisibility(View.VISIBLE);
-            imageViewPreviewDialog.setImageURI(selectedImageUri);
+        if (requestCode == REQUEST_CODE_PICK_IMAGE && resultCode == RESULT_OK && data != null) {
+            selectedImageUri = data.getData();
+            if (imageViewPreviewDialog != null) {
+                imageViewPreviewDialog.setVisibility(View.VISIBLE);
+                imageViewPreviewDialog.setImageURI(selectedImageUri);
+            }
+            Toast.makeText(this, "Image selected", Toast.LENGTH_SHORT).show();
         }
-
-        Toast.makeText(this, "Image selected", Toast.LENGTH_SHORT).show();
     }
 }
-
