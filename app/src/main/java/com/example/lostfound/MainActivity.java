@@ -1,4 +1,5 @@
 package com.lostandfound;
+import com.lostandfound.R;
 import com.lostandfound.Post;
 import com.lostandfound.PostsAdapter;
 
@@ -178,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
 
 
 
