@@ -1,4 +1,7 @@
 package com.example.lostfound;
+import com.example.lostfound.R; // This must match your package
+import com.example.lostfound.Post;
+import com.example.lostfound.PostsAdapter;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -170,4 +173,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
 
