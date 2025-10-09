@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.example.lostandfound'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.lostandfound"
-        minSdk 23
-        targetSdk 34
+        minSdk 24
+        targetSdk 35
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -34,6 +34,7 @@ android {
     // To avoid compileSdk warning (optional)
     buildFeatures {
         viewBinding true
+        dataBinding true
     }
 }
 
@@ -67,4 +68,5 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 }
+
 
