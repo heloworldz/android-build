@@ -1,6 +1,6 @@
-package com.example.lostandfound;
-import com.example.lostfoundnetwork.Post;
-import com.example.lostfoundnetwork.PostsAdapter;
+package com.lostandfound;
+import com.lostandfound;.Post;
+import com.lostandfound;.PostsAdapter;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -178,4 +178,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
 
